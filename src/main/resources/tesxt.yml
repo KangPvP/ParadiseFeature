@@ -1,0 +1,28 @@
+
+
+porteslist:
+  65-6525467456346:
+    gate: "Porte1"
+    location: "Main:10:100:-700:98:70"
+    direction: "-90"
+    axe: "x"
+    actionToOpen: 1
+    isOpen: false
+  65-6525467456395:
+    gate: "Porte1"
+    location: "Main:12:100:-700:98:70"
+    direction: "-90"
+    axe: "x"
+    actionToOpen: -1
+    isOpen: false
+
+spawnmap:
+  zonetp: []
+
+  spawnpoints:
+    44646448964: "Main:10:100:-700:98:70"
+    46774642876: "Main:10:100:-700:98:70"
+
+
+
+

@@ -1,0 +1,48 @@
+items:
+  phone:
+    material: "RED_WOOL"
+    custom-model-data: 0
+    name: "&4Phone"
+    lore: []
+    commands: []
+
+welcome:
+  location:
+    spawn: "world;0.5;78;60.5;0;90"  # worldname;x;y;z;yaw;pitch
+  msgjoin: "%player% viens de rejoindre"
+  msgleave: "%player% viens de quitté"
+  system:
+    messages: ["bvn", "bienvenue"]
+    delay: 10 #In seconds
+    rewards:
+      nb: 2
+      0:
+        chance: 10
+        commands: ["pl"]
+      1:
+        chance: 90
+        commands: ["gamemode survival"]
+
+
+  paliers:
+    5:
+      commands: ["test1","test2"]
+    10:
+      commands: [ "test1","test2" ]
+    15:
+      commands: [ "test1","test2" ]
+
+spawnmap:
+  messages:
+    enter: "Vous entrez dans une zone de téléportation vers la map GTA"
+    exit: "Vous sortez d'une zone de téléportation"
+    tp-complet: "Vous avez été tp dans la map GTA"
+  timetp: 5 #Time in second
+
+deathsystem:
+  title: "Vous êtes mort"
+  subtitle: "%killer%" #placeHolder %killer% pour désinier le killer
+
+
+
+

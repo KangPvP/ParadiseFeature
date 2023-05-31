@@ -1,0 +1,20 @@
+name: Feature
+version: '${project.version}'
+main: fr.paradise.feature.Main
+api-version: 1.19
+authors: [ KangPvP ]
+description: Plugin concernant le management du serveur ParadiseWood
+depend: [ ProtocolLib, WorldGuard ]
+
+commands:
+  chatcancel:
+
+  clearchat:
+
+  porte:
+    permission: paradise.admin
+
+  spawnmap:
+    permission: paradise.admin
+
+  featurereload:
