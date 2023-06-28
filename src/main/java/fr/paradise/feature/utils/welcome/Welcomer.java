@@ -1,8 +1,6 @@
 package fr.paradise.feature.utils.welcome;
 
 
-import fr.paradise.feature.Main;
-import fr.paradise.feature.utils.CommandsHelper;
 import fr.paradise.feature.utils.Config;
 import org.bukkit.entity.Player;
 

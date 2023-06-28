@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,9 +52,6 @@ public class PlayerSendMsg implements Listener {
                 });
 
                 listPlayersPolit.add(player);
-
-
-
             } else {
                 player.sendMessage("Il n'y a pas de nouveau a qui shouhaiter la bienvenue");
             }
