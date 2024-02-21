@@ -16,7 +16,7 @@ public class PlayerLeave implements Listener {
     public void onLeave(PlayerQuitEvent event){
         Player player = event.getPlayer();
 
-        event.setQuitMessage(Config.getColored("welcome.leave").replace("%player%", player.getName()));
+        event.setQuitMessage(Config.getColored("welcome.msgleave").replace("%player%", player.getName()));
 
         Main.getInstance().nbPlayer = Main.getInstance().nbPlayer - 1;
 

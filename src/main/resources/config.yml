@@ -6,6 +6,10 @@ items:
     lore: []
     commands: []
 
+porte:
+  soundopen: "port_auto" #nom du son
+  soundclose: "port_auto"
+
 welcome:
   location:
     spawn: "world;0.5;78;60.5;0;90"  # worldname;x;y;z;yaw;pitch

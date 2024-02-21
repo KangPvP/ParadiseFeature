@@ -1,8 +1,10 @@
 package fr.paradise.feature.utils.armorstand;
 
+import fr.paradise.feature.utils.Config;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class SystemPorte {
@@ -15,6 +17,8 @@ public class SystemPorte {
             } else {
                 entity.teleport(porte.getLocation().add(0,0, porte.actionToOpen));
             }
+            System.out.println("Porte ouverte");
+
             porte.setIsOpen(true);
         }
     }
@@ -29,8 +33,4 @@ public class SystemPorte {
             porte.setIsOpen(false);
         }
     }
-
-
-
-
 }

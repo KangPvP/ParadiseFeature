@@ -1,16 +1,20 @@
 package fr.paradise.feature.utils.armorstand;
 
+import fr.paradise.feature.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class PorteAuto {
 
     public static HashMap<UUID, PorteAuto> listPortes = new HashMap<>();
+    public static HashMap<String, ArrayList<PorteAuto>> groupPortes = new HashMap<String, ArrayList<PorteAuto>>();
+
     public UUID uuid;
     public String gate;
     public String location;
@@ -18,6 +22,7 @@ public class PorteAuto {
     public String axe;
     public int actionToOpen;
     public boolean isOpen;
+    public Location locDetection;
 
 
     public PorteAuto(UUID id, Location location, String gateName){
@@ -29,7 +34,26 @@ public class PorteAuto {
         this.actionToOpen = getactionToOpen(this.direction);
         this.isOpen = false;
 
+        this.locDetection = null;
+
         PorteAuto.listPortes.put(id, this);
+
+
+        // Crée une HashMap avec les portes link et leurs nom
+
+        if(PorteAuto.groupPortes.containsKey(gateName)){
+            ArrayList<PorteAuto> listePorteExiste = PorteAuto.groupPortes.get(gateName);
+            listePorteExiste.add(this);
+
+            PorteAuto.groupPortes.put(gateName, listePorteExiste);
+        } else {
+            ArrayList<PorteAuto> listePorte = new ArrayList<>();
+            listePorte.add(this);
+            PorteAuto.groupPortes.put(gateName, listePorte);
+        }
+
+
+
     }
 
     public static void loadPortes(){
@@ -48,6 +72,7 @@ public class PorteAuto {
         }
 
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Les \"Portes Automatique\" ont été chargé");
+        new PorteRunnable().runTaskTimer(Main.getInstance(), 20,5);
 
     }
 
@@ -188,21 +213,41 @@ public class PorteAuto {
         return porteNoSave;
     }
 
-    public static PorteAuto getPorteLink(PorteAuto porteAuto){
+    public PorteAuto getPorteLink(){
 
-        String gateName = porteAuto.gate;
+        String gateName = this.gate;
 
         for (HashMap.Entry<UUID, PorteAuto> entry : listPortes.entrySet()) {
             UUID id = entry.getKey();
             PorteAuto porte = entry.getValue();
 
             if(porte.gate.equals(gateName)){ //If les deux portes on le meme nom de Gate
-                if(!id.equals(porteAuto.uuid)){ //If la porte get != a la porte
+                if(!id.equals(this.uuid)){ //If la porte get != a la porte
                     return porte;
                 }
             }
         }
         return null;
+    }
+
+    public Location pointOfDetection(){
+        PorteAuto porteLink = this.getPorteLink();
+        if (porteLink != null){ // C'est une double porte
+            double xMid = (this.getLocation().getX() + porteLink.getLocation().getX()) / 2;
+            double yMid = (this.getLocation().getY() + porteLink.getLocation().getY()) / 2;
+            double zMid = (this.getLocation().getZ() + porteLink.getLocation().getZ()) / 2;
+
+
+            if(this.getLocation().getWorld() != porteLink.getLocation().getWorld()){
+                System.out.println("Erreur, conflit entre la porte: " + this.getLocation() + " et la porte " + porteLink.getLocation());
+                System.out.println("Ces portes on le meme nom mais ne sont pas sur la même map");
+            }
+
+            Location locDetection = new Location(this.getLocation().getWorld(), xMid, yMid, zMid);
+
+            return locDetection;
+        }
+        return this.getLocation();
     }
 
 

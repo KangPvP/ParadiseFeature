@@ -10,10 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -52,7 +49,6 @@ public class PlayerDeath implements Listener {
                 }
 
                 if(ticks == 50){
-
                     String title = Config.get("deathsystem.title");
                     String subtitle = Config.get("deathsystem.subtitle").replace("%killer%", player.getName()) ;
 

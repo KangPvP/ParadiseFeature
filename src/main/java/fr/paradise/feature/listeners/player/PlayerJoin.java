@@ -6,8 +6,6 @@ import fr.paradise.feature.utils.CommandsHelper;
 import fr.paradise.feature.utils.Config;
 import fr.paradise.feature.utils.CreateItems;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
