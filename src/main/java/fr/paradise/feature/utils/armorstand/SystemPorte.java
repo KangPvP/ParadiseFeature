@@ -17,7 +17,6 @@ public class SystemPorte {
             } else {
                 entity.teleport(porte.getLocation().add(0,0, porte.actionToOpen));
             }
-            System.out.println("Porte ouverte");
 
             porte.setIsOpen(true);
         }

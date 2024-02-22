@@ -1,5 +1,6 @@
 package fr.paradise.feature.utils.armorstand;
 
+import fr.paradise.feature.utils.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -33,6 +34,9 @@ public class PorteRunnable extends BukkitRunnable {
 
                     for(Entity entity : listNearEntity){
                         if( entity.getUniqueId().equals(porteOne.uuid) ){
+                            if(porteOne.isOpen == false){
+                                porteOne.getLocation().getWorld().playSound(porteOne.getLocation(), Objects.requireNonNull(Config.get("porte.soundopen")), (float) 0.5, 1);
+                            }
                             SystemPorte.porteOpen(porteOne, entity); //Ouvrir la porte 1
                         }
                         if(porteTwo != null){
@@ -48,7 +52,10 @@ public class PorteRunnable extends BukkitRunnable {
                 List<Entity> listNearEntity = (List<Entity>) locDetection.getWorld().getNearbyEntities(locDetection, 4,4,4);
                 for(Entity entity : listNearEntity){
                     if( entity.getUniqueId().equals(porteOne.uuid) ){
-                        SystemPorte.porteClose(porteOne, entity); //Fermer la porte 2
+                        if(porteOne.isOpen == true){
+                            porteOne.getLocation().getWorld().playSound(porteOne.getLocation(), Objects.requireNonNull(Config.get("porte.soundclose")), (float) 0.5, 1);
+                        }
+                        SystemPorte.porteClose(porteOne, entity); //Fermer la porte 1
                     }
                     if(porteTwo != null){
                         if(entity.getUniqueId() == porteTwo.uuid){

@@ -22,7 +22,6 @@ public class PorteAuto {
     public String axe;
     public int actionToOpen;
     public boolean isOpen;
-    public Location locDetection;
 
 
     public PorteAuto(UUID id, Location location, String gateName){
@@ -33,8 +32,6 @@ public class PorteAuto {
         this.axe = getAxe(this.direction);
         this.actionToOpen = getactionToOpen(this.direction);
         this.isOpen = false;
-
-        this.locDetection = null;
 
         PorteAuto.listPortes.put(id, this);
 

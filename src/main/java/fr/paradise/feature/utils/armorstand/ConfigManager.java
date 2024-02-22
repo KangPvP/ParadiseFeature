@@ -213,10 +213,4 @@ public class ConfigManager {
 
 		return spawnPoints;
 	}
-
-
-
-
-
-
 }
