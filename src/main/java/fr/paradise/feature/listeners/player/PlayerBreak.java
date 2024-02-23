@@ -45,7 +45,7 @@ public class PlayerBreak implements Listener {
 
     @EventHandler
     public void onBreakEntity(EntityDamageEvent event){
-        if (event.getEntity().getType() == EntityType.ARMOR_STAND) {
+        if (event.getEntity().getType().equals(EntityType.ARMOR_STAND)) {
 
             if(PorteAuto.listPortes.containsKey(event.getEntity().getUniqueId())){
                 event.setCancelled(true);

@@ -171,7 +171,7 @@ public class PorteAuto {
 
             Location locValue = value.getLocation();
 
-            if(locValue.getWorld().getName().equals(location.getWorld().getName())){
+            if(locValue.getWorld().equals(location.getWorld())){
                 if(locValue.getX() == location.getX()){
                     if(locValue.getY() == location.getY()){
                         if(locValue.getZ() == location.getZ()){

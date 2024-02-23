@@ -58,7 +58,7 @@ public class PorteRunnable extends BukkitRunnable {
                         SystemPorte.porteClose(porteOne, entity); //Fermer la porte 1
                     }
                     if(porteTwo != null){
-                        if(entity.getUniqueId() == porteTwo.uuid){
+                        if(entity.getUniqueId().equals(porteTwo.uuid)){
                             SystemPorte.porteClose(porteTwo, entity); //Fermer la porte 2
                         }
                     }
