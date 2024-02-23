@@ -33,13 +33,12 @@ public class Porte implements CommandExecutor, TabCompleter {
         location.add(0.5, 0.0, 0.5);
         location.setYaw(player.getLocation().getYaw());
 
-        HashMap<UUID, PorteAuto> listPortes = PorteAuto.listPortes;
-
         if(args.length == 0){ //message Help Utilisation
             player.sendMessage(ChatColor.LIGHT_PURPLE+  "|| = > Porte Commands :");
             player.sendMessage("/porte help");
             player.sendMessage("/porte remove");
             player.sendMessage("/porte place [gatename]");
+
             return false;
 
         }else if (args.length == 1){
@@ -60,7 +59,7 @@ public class Porte implements CommandExecutor, TabCompleter {
                     return false;
                 }
                 UUID porteId = porteSelect.uuid;
-                listPortes.remove(porteId);
+                PorteAuto.listPortes.remove(porteId);
 
                 player.sendMessage("Vous avez supprimé cette porte");
 
@@ -72,7 +71,7 @@ public class Porte implements CommandExecutor, TabCompleter {
             //==============================================================\\
             //                    CMD /porte place
             if(args[0].equalsIgnoreCase("place")){ //CMD /porte place
-                if( namePorteExist(listPortes, args[1]) ){
+                if( namePorteExist(PorteAuto.listPortes, args[1]) ){
                     player.sendMessage("Ce nom de gate est déja utilisé");
                     return false;
                 }
