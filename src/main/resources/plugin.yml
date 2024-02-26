@@ -18,3 +18,5 @@ commands:
     permission: paradise.admin
 
   featurereload:
+
+  testspawn:

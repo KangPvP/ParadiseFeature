@@ -189,7 +189,7 @@ public class PorteAuto {
         ArrayList<UUID> porteRemove = new ArrayList<>();
 
         for (UUID id : portelist) {
-            if(!listPortes.containsKey(id)){
+            if(!listPortes.containsKey(id)) {
                 porteRemove.add(id);
             }
         }

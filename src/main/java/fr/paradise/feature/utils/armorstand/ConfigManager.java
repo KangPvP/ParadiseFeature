@@ -111,7 +111,6 @@ public class ConfigManager {
 
 
 	public List<String> getList(String path) {
-		System.out.println(ConfigManager.datasystemcfg);
 		if (ConfigManager.datasystemcfg.contains(path)) {
 			return (List<String>) ConfigManager.datasystemcfg.getStringList(path);
 		}

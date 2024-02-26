@@ -2,10 +2,7 @@ package fr.paradise.feature;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import fr.paradise.feature.commands.ChatCancel;
-import fr.paradise.feature.commands.ClearChat;
-import fr.paradise.feature.commands.FeatureReload;
-import fr.paradise.feature.commands.Porte;
+import fr.paradise.feature.commands.*;
 import fr.paradise.feature.data.PlayerDataManager;
 import fr.paradise.feature.listeners.player.*;
 import fr.paradise.feature.listeners.world.WorldBlockFrom;
@@ -67,6 +64,8 @@ public final class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginCommand("clearchat").setExecutor(new ClearChat());
         Bukkit.getPluginCommand("spawnmap").setExecutor(new fr.paradise.feature.commands.SpawnMap());
         Bukkit.getPluginCommand("featurereload").setExecutor(new FeatureReload());
+        Bukkit.getPluginCommand("testspawn").setExecutor(new TestSpawn());
+
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeave(), this);
@@ -97,6 +96,7 @@ public final class Main extends JavaPlugin implements Listener {
         //this.cinematicFixer = new CinematicFixer(this);
         PorteAuto.loadPortes();
         //Load zoneTp
+
         ArrayList<String> regionsZoneArray = (ArrayList<String>) ConfigManager.getInstance().getList("spawnmap.zonetp");
         Main.getSpawnMap().regionsZoneTp = regionsZoneArray;
         //Load spawnPoints
