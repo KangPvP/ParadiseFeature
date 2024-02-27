@@ -62,30 +62,5 @@ public class PlayerMove implements Listener {
                 player.sendMessage(Config.getColored("spawnmap.messages.exit"));
             }
         }
-
-        //   BarInfoMap
-        Location from = event.getFrom();
-        Location to = event.getTo();
-
-        assert to != null;
-        if (from.getBlockX() == to.getBlockX() && from.getBlockY() == to.getBlockY() && from.getBlockZ() == to.getBlockZ()){
-
-            List<String> nameRegions = Config.getList("barinfomap.regionsname");
-
-            assert nameRegions != null;
-            for(String nameRegion : nameRegions){
-                if(RegionManage.isInRegion(player, nameRegion)){
-
-                }
-            }
-
-
-        }
-
-
-
-
-
-
     }
 }

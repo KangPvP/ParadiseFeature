@@ -27,13 +27,11 @@ public class PlayerJoin implements Listener {
 
         Player player = event.getPlayer();
 
-        BossBar bar = Bukkit.createBossBar(" ", BarColor.YELLOW, BarStyle.SOLID);
-        bar.addPlayer(player);
+        BossBar barInfo = Bukkit.createBossBar(" ", BarColor.YELLOW, BarStyle.SOLID);
+        barInfo.setVisible(false);
+        barInfo.addPlayer(player);
 
-
-
-
-        PlayerDataManager.setData(event.getPlayer());
+        PlayerDataManager.setData(event.getPlayer(), barInfo);
 
 
         //Telephone emplacement 9
