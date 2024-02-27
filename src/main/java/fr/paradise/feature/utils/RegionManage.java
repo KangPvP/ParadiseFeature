@@ -20,10 +20,23 @@ import java.util.UUID;
 
 public class RegionManage {
 
-    public static ProtectedRegion getRegionsByName(Player player,String name){
+    public static RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+
+
+
+    public static ProtectedRegion getRegionsByName(World world, String name){
+        World world_sk98q = (World) BukkitAdapter.adapt(world);
+
+        RegionManager regions = container.get(world_sk98q);
+        ProtectedRegion region = regions.getRegion(name);
+
+        return region;
+    }
+
+    public static ProtectedRegion getRegionsByName(Player player, String name){
         World world = BukkitAdapter.adapt(player.getWorld());
 
-        RegionManager regions = WorldGuard.getInstance().getPlatform().getRegionContainer().get(world);
+        RegionManager regions = container.get(world);
         ProtectedRegion region = regions.getRegion(name);
 
         return region;
@@ -32,7 +45,6 @@ public class RegionManage {
     public static boolean isInRegion(Player player, String regionName) {
 
             com.sk89q.worldedit.util.Location location = BukkitAdapter.adapt(player.getLocation());
-            RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
             RegionQuery query = container.createQuery();
             ApplicableRegionSet set = query.getApplicableRegions(location);
 

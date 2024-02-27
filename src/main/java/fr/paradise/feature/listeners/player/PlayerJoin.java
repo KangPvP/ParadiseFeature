@@ -6,8 +6,12 @@ import fr.paradise.feature.utils.CommandsHelper;
 import fr.paradise.feature.utils.Config;
 import fr.paradise.feature.utils.CreateItems;
 import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -18,9 +22,16 @@ import java.util.List;
 
 
 public class PlayerJoin implements Listener {
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onJoin(PlayerJoinEvent event){
+
         Player player = event.getPlayer();
+
+        BossBar bar = Bukkit.createBossBar(" ", BarColor.YELLOW, BarStyle.SOLID);
+        bar.addPlayer(player);
+
+
+
 
         PlayerDataManager.setData(event.getPlayer());
 

@@ -1,5 +1,9 @@
 package fr.paradise.feature.listeners.player;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
 import fr.paradise.feature.Main;
 import fr.paradise.feature.data.PlayerDataManager;
 import fr.paradise.feature.utils.CommandsHelper;
@@ -9,6 +13,7 @@ import fr.paradise.feature.utils.armorstand.PorteAuto;
 import fr.paradise.feature.utils.armorstand.SystemPorte;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -16,6 +21,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -43,74 +49,6 @@ public class PlayerMove implements Listener {
             }
         }
 
-
-        //========= Systeme Détection porte =========
-        /*List<Entity> allEntity = player.getWorld().getEntities();
-        List<Entity> nearEntityO = player.getNearbyEntities(3, 3, 3);
-        List<Entity> nearEntityC = player.getNearbyEntities(3, 3, 3);
-
-        //Liste des ArmorStand near
-        List<Entity> nearArmorStandCustom = nearEntityO.stream()
-                .filter(entity -> entity.getType() == EntityType.ARMOR_STAND && PorteAuto.listPortes.containsKey(entity.getUniqueId()))
-                .collect(Collectors.toList());
-        //Liste des ArmorStand nearOver
-        List<Entity> nearOverArmorStandCustom = allEntity.stream()
-                .filter(entity -> entity.getType() == EntityType.ARMOR_STAND && PorteAuto.listPortes.containsKey(entity.getUniqueId()))
-                .filter(entity -> !nearEntityC.contains(entity))
-                .collect(Collectors.toList());
-
-        for(Entity entity : nearArmorStandCustom) {
-            PorteAuto porte = PorteAuto.listPortes.get(entity.getUniqueId());
-            //Open First Porte
-            if(!porte.isOpen){
-                System.out.println("print Sound Open");
-                porte.getLocation().getWorld().playSound(porte.getLocation(), Objects.requireNonNull(Config.get("porte.soundopen")), (float) 0.5, 1);
-            }
-            SystemPorte.porteOpen(porte, entity);
-
-            PorteAuto porteLink = porte.getPorteLink();
-
-            if(porteLink != null){
-
-                List<Entity> nearLink = entity.getNearbyEntities(3, 3, 3);
-                //Foreach entity next to the entity
-                for(Entity entityLink : nearLink){
-                    if(entityLink.getType().equals(EntityType.ARMOR_STAND) && entityLink.getUniqueId().equals(porteLink.uuid)){
-                        //Open Second Porte
-                        SystemPorte.porteOpen(porteLink, entityLink);
-
-                    }
-                }
-            }
-
-
-
-        }
-
-        for(Entity entity : nearOverArmorStandCustom){
-            PorteAuto porte = PorteAuto.listPortes.get(entity.getUniqueId());
-            //Close First Porte
-            if(porte.isOpen){
-                System.out.println("print Sound Close");
-                porte.getLocation().getWorld().playSound(porte.getLocation(), Objects.requireNonNull(Config.get("porte.soundclose")), (float) 0.5, 1);
-            }
-            SystemPorte.porteClose(porte, entity);
-            PorteAuto porteLink = porte.getPorteLink();
-
-            if(porteLink != null){
-                List<Entity> nearLink = entity.getNearbyEntities(3, 3, 3);
-                //Foreach entity next to the entity
-                for(Entity entityLink : nearLink){
-                    if(entityLink.getType().equals(EntityType.ARMOR_STAND) && entityLink.getUniqueId().equals(porteLink.uuid)){
-                        //Open Second Porte
-                        SystemPorte.porteClose(porteLink, entityLink);
-                    }
-                }
-            }
-
-
-        }*/
-
         if(RegionManage.isInRegion(player, Main.getSpawnMap().regionsZoneTp)){ //Player in a zoneTp
             //if le player entre dans la zone
             if(!Main.getSpawnMap().playersInZoneTp.containsKey(player)){
@@ -123,10 +61,31 @@ public class PlayerMove implements Listener {
                 Main.getSpawnMap().playersInZoneTp.remove(player);
                 player.sendMessage(Config.getColored("spawnmap.messages.exit"));
             }
+        }
+
+        //   BarInfoMap
+        Location from = event.getFrom();
+        Location to = event.getTo();
+
+        assert to != null;
+        if (from.getBlockX() == to.getBlockX() && from.getBlockY() == to.getBlockY() && from.getBlockZ() == to.getBlockZ()){
+
+            List<String> nameRegions = Config.getList("barinfomap.regionsname");
+
+            assert nameRegions != null;
+            for(String nameRegion : nameRegions){
+                if(RegionManage.isInRegion(player, nameRegion)){
+
+                }
+            }
+
 
         }
 
 
-    }
 
+
+
+
+    }
 }
