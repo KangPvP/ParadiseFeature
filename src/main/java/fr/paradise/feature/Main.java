@@ -65,6 +65,7 @@ public final class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginCommand("spawnmap").setExecutor(new fr.paradise.feature.commands.SpawnMap());
         Bukkit.getPluginCommand("featurereload").setExecutor(new FeatureReload());
         Bukkit.getPluginCommand("testspawn").setExecutor(new TestSpawn());
+        Bukkit.getPluginCommand("editbarinfomap").setExecutor(new EditBarInfoMap());
 
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);

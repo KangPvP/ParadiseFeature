@@ -22,12 +22,12 @@ public class EditBarInfoMap implements CommandExecutor {
             if(player == null){
                 return false;
             }
+            System.out.println("Ok good");
 
             PlayerData playerData = PlayerDataManager.getData(player);
-
-            if(!displayRegionName.equals(playerData.getBarInfoMap().getTitle())){
+            if(playerData != null){
                 playerData.setDataPlayerBar(displayRegionName);
-                return true;
+                System.out.println("Ok good 1");
             }
 
         } else {

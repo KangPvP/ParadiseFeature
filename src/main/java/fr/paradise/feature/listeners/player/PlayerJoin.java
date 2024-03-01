@@ -27,8 +27,8 @@ public class PlayerJoin implements Listener {
 
         Player player = event.getPlayer();
 
-        BossBar barInfo = Bukkit.createBossBar(" ", BarColor.YELLOW, BarStyle.SOLID);
-        barInfo.setVisible(false);
+        BossBar barInfo = Bukkit.createBossBar("My Regions", BarColor.YELLOW, BarStyle.SOLID);
+        barInfo.setVisible(true);
         barInfo.addPlayer(player);
 
         PlayerDataManager.setData(event.getPlayer(), barInfo);
