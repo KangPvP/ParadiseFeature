@@ -15,19 +15,25 @@ public class EditBarInfoMap implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
-        if (strings.length == 2) {
+        if (strings.length >= 2) {
             Player player = Bukkit.getPlayer(strings[0]);
-            String displayRegionName = strings[1];
+            StringBuilder displayRegionName = new StringBuilder();
+
+            for(int i=1; i < strings.length;i++){
+                if(i+1 == strings.length){
+                    displayRegionName.append(strings[i]);
+                }else{
+                    displayRegionName.append(strings[i]).append(" ");
+                }
+            }
 
             if(player == null){
                 return false;
             }
-            System.out.println("Ok good");
 
             PlayerData playerData = PlayerDataManager.getData(player);
             if(playerData != null){
-                playerData.setDataPlayerBar(displayRegionName);
-                System.out.println("Ok good 1");
+                playerData.setDataPlayerBar(displayRegionName.toString());
             }
 
         } else {
