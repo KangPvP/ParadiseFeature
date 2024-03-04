@@ -56,8 +56,6 @@ public final class Main extends JavaPlugin implements Listener {
 
         spawnmap = new SpawnMap();
 
-        spawnLoc = Config.getLocation("welcome.location.spawn");
-
         //LoadConfigFile
         Bukkit.getPluginCommand("chatcancel").setExecutor(new ChatCancel());
         Bukkit.getPluginCommand("porte").setExecutor(new Porte());
@@ -89,7 +87,10 @@ public final class Main extends JavaPlugin implements Listener {
         BukkitScheduler scheduler = this.getServer().getScheduler();
         scheduler.runTaskLater(this, new Runnable() {
             @Override
-            public void run() { onLoad(); }
+            public void run() {
+                onLoad();
+                spawnLoc = Config.getLocation("welcome.location.spawn");
+            }
         }, 30L);
     }
 

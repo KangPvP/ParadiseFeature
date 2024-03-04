@@ -29,12 +29,6 @@ public class Welcomer {
         this.newPlayer.add(System.currentTimeMillis());
 
         this.playersPolit.put(player, new ArrayList<Player>());
-
-        System.out.println(this.newPlayer);
-        System.out.println(this.newPlayer.get(0));
-        System.out.println(this.newPlayer.get(1));
-
-        System.out.println(this.playersPolit);
     }
 
     public boolean newPlayerValide(){
