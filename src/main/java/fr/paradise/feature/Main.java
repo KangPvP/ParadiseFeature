@@ -83,6 +83,7 @@ public final class Main extends JavaPlugin implements Listener {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntity(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerCommands(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new WorldBlockFrom(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerOpenCloseInv(), this);
 
         BukkitScheduler scheduler = this.getServer().getScheduler();
         scheduler.runTaskLater(this, new Runnable() {

@@ -7,10 +7,17 @@ import fr.paradise.feature.utils.CreateItems;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -22,6 +29,7 @@ public class PlayerInteract implements Listener {
 
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
+
 
         if (item.getType() == Material.AIR) {
             return;
@@ -43,5 +51,4 @@ public class PlayerInteract implements Listener {
 
 
     }
-
 }
