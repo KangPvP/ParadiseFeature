@@ -17,12 +17,15 @@ public class PlayerOpenCloseInv implements Listener {
         event.getView().getOriginalTitle();
 
         if(invView.getType().equals(InventoryType.CHEST) || invView.getType().equals(InventoryType.ENDER_CHEST)){
+            player.sendMessage(invView.getOriginalTitle());
+            player.sendMessage(invView.getTitle());
 
-            if(invView.getOriginalTitle().equals("Coffre")){
+
+            if(invView.getOriginalTitle().equals("Chest")){
                 player.sendTitle("Coffre", "", 0, 300*20, 0);
-            } else if(invView.getOriginalTitle().equals("Coffre de l'Ender")){
+            } else if(invView.getOriginalTitle().equals("Ender Chest")){
                 player.sendTitle("Coffre de l'Ender", "", 0, 300*20, 0);
-            } else if(invView.getOriginalTitle().equals("Grand coffre")){
+            } else if(invView.getOriginalTitle().equals("Large Chest")){
                 player.sendTitle("Grand Coffre", "", 0, 300*20, 0);
             }
         }
@@ -34,9 +37,9 @@ public class PlayerOpenCloseInv implements Listener {
     @EventHandler
     public void onCloseChest(InventoryCloseEvent event){
         Player player = (Player) event.getPlayer();
-        InventoryType invType = event.getInventory().getType();
+        InventoryView invView = event.getView();
 
-        if(invType.equals(InventoryType.CHEST) ){
+        if(invView.getType().equals(InventoryType.CHEST) || invView.getType().equals(InventoryType.ENDER_CHEST)){
             player.sendTitle("Close Inventory", "", 0, 10, 0);
         }
     }
