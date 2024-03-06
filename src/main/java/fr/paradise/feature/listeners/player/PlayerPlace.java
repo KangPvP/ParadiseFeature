@@ -18,12 +18,6 @@ public class PlayerPlace implements Listener {
         Block block = event.getBlock();
         event.getItemInHand();
 
-        System.out.println(block.getBlockData().getAsString());
-        if(block.getState() instanceof Chest){
-            Chest chest = (Chest) block.getState();
-            chest.setCustomName("BB inv");
-
-        }
 
     }
 }
