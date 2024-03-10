@@ -10,6 +10,8 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
+import org.bukkit.block.DoubleChest;
+import org.bukkit.block.EnderChest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,10 +32,36 @@ public class PlayerInteract implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
 
+        // Chest System rename
+        if (event.getClickedBlock() != null){
+            if (event.getClickedBlock().getState() instanceof Chest) {
+                Chest chest = (Chest) event.getClickedBlock().getState();
+                if(chest.getCustomName() != null){
+                    return;
+                }
+
+                if(chest.getInventory().getSize() == 54){
+                    chest.setCustomName(Config.get("renamechest.largechest"));
+                } else {
+                    chest.setCustomName(Config.get("renamechest.chest"));
+                }
+                chest.update();
+
+            }
+            if(event.getClickedBlock().getState() instanceof EnderChest){
+                EnderChest chestC = (EnderChest) event.getClickedBlock().getState();
+
+
+            }
+
+        }
 
         if (item.getType() == Material.AIR) {
             return;
         }
+
+
+
 
         if(player.getGameMode().equals(GameMode.SPECTATOR)){
             event.setCancelled(true);

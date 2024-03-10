@@ -43,13 +43,14 @@ spawnmap:
     tp-complet: "Vous avez été tp dans la map GTA"
   timetp: 5 #Time in second
 
-barinfomap:
-  nomworld: "gta" # Monde dans le quel ce trouve les régions
-  regionsname: ["regions_1", "regions_2"]
-
 deathsystem:
   title: "Vous êtes mort"
   subtitle: "%killer%" #placeHolder %killer% pour désinier le killer
+
+renamechest:
+  chest: "Chest"
+  enderchest: "EnderChest"
+  largechest: "LargeChest"
 
 
 
