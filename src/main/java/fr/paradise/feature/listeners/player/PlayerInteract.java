@@ -46,22 +46,12 @@ public class PlayerInteract implements Listener {
                     chest.setCustomName(Config.get("renamechest.chest"));
                 }
                 chest.update();
-
             }
-            if(event.getClickedBlock().getState() instanceof EnderChest){
-                EnderChest chestC = (EnderChest) event.getClickedBlock().getState();
-
-
-            }
-
         }
 
         if (item.getType() == Material.AIR) {
             return;
         }
-
-
-
 
         if(player.getGameMode().equals(GameMode.SPECTATOR)){
             event.setCancelled(true);

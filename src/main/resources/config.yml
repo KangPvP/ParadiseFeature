@@ -49,7 +49,6 @@ deathsystem:
 
 renamechest:
   chest: "Chest"
-  enderchest: "EnderChest"
   largechest: "LargeChest"
 
 
