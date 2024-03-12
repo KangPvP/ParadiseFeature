@@ -2,6 +2,7 @@ package fr.paradise.feature.listeners.player;
 
 import fr.paradise.feature.Main;
 import fr.paradise.feature.data.PlayerDataManager;
+import fr.paradise.feature.utils.CommandsHelper;
 import fr.paradise.feature.utils.Config;
 import fr.paradise.feature.utils.CreateItems;
 import org.bukkit.*;
@@ -15,11 +16,20 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.HashMap;
+
 public class PlayerDeath implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event){
         Player player = event.getEntity();
+        Player killer = player.getKiller();
+
+        if(killer != null){
+            System.out.println("Vous avez été tué par :" + killer.getName());
+
+        }
+
         player.setGameMode(GameMode.SPECTATOR);
         PlayerDataManager.getData(player).setPlayerDeadCine(0);
         Vector levitationVector = new Vector(0, 0.1, 0);
@@ -28,6 +38,7 @@ public class PlayerDeath implements Listener {
 
         new BukkitRunnable() {
             int ticks = 0;
+
 
             public void run() {
                 if (ticks > 2 && ticks <= 100) {
@@ -52,20 +63,36 @@ public class PlayerDeath implements Listener {
                 if(ticks == 2){
                     Location loc = player.getLocation();
                     player.teleport(deathLocation);
+
+                    HashMap<String, String> params = new HashMap<>();
+                    params.put("%player%", player.getName());
+
+                    if(killer != null){
+                        params.put("%killer%", killer.getName());
+                    }
+                    CommandsHelper.executeAll(Config.getList("deathsystem.commands-death"), params);
+
                 }else if(ticks == 50){
                     String title = Config.get("deathsystem.title");
-                    Player killer = event.getEntity().getKiller();
-                    if(killer != null){
+                    player.sendTitle(title, "", 20,160,20);
+
+                } else if (ticks == 66){
+                    String title = Config.get("deathsystem.title");
+                    if(killer != null) {
                         String subtitle = Config.get("deathsystem.subtitle").replace("%killer%", killer.getName()) ;
-                        player.sendTitle(title, subtitle);
+                        player.sendTitle(title, subtitle, 0,140,20);
                     }
-
-
-                } else if (ticks == 56){
-                    player.playSound(player.getLocation(), Sound.BLOCK_HONEY_BLOCK_BREAK, 1, 1);
-                } else if(ticks == 100){
+                } else if(ticks == 100) {
                     PlayerDataManager.getData(player).setPlayerDeadCine(1);
-                } else if(ticks == 160){
+
+                } else if(ticks == 140){
+                    HashMap<String, String> params = new HashMap<>();
+                    params.put("%player%", player.getName());
+                    if(killer != null){
+                        params.put("%killer%", killer.getName());
+                    }
+                    CommandsHelper.executeAll(Config.getList("deathsystem.commands-respawn"), params);
+                } else if(ticks == 160) {
                     player.teleport(Main.getInstance().spawnLoc);
                     PlayerDataManager.getData(player).removePlayerDeadCine();
                     player.setGameMode(GameMode.SURVIVAL);//Remove Player

@@ -46,6 +46,8 @@ spawnmap:
 deathsystem:
   title: "Vous êtes mort"
   subtitle: "%killer%" #placeHolder %killer% pour désinier le killer
+  commands-death: []
+  commands-respawn: []
 
 renamechest:
   chest: "Chest"

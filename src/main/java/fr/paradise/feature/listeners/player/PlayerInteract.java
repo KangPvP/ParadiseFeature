@@ -36,9 +36,6 @@ public class PlayerInteract implements Listener {
         if (event.getClickedBlock() != null){
             if (event.getClickedBlock().getState() instanceof Chest) {
                 Chest chest = (Chest) event.getClickedBlock().getState();
-                if(chest.getCustomName() != null){
-                    return;
-                }
 
                 if(chest.getInventory().getSize() == 54){
                     chest.setCustomName(Config.get("renamechest.largechest"));
