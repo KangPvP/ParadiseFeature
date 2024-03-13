@@ -5,9 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,8 +17,14 @@ public class TestSpawn implements CommandExecutor {
 
         if (commandSender instanceof Player){
             Player player = (Player) commandSender;
-            Creature creature = (Creature) player.getLocation().getWorld().spawnEntity(player.getLocation(), EntityType.PIGLIN);
+            PiglinAbstract creature = (PiglinAbstract) player.getLocation().getWorld().spawnEntity(player.getLocation(), EntityType.PIGLIN);
             Objects.requireNonNull(creature.getEquipment()).setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
+            creature.setImmuneToZombification(true);
+            creature.setAdult();
+            creature.setRemoveWhenFarAway(false);
+            creature.getEquipment().setItemInMainHand(new ItemStack(Material.STICK));
+
+
         }
 
 
