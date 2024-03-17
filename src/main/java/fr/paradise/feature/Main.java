@@ -91,7 +91,7 @@ public final class Main extends JavaPlugin implements Listener {
                 onLoad();
                 spawnLoc = Config.getLocation("welcome.location.spawn");
             }
-        }, 30L);
+        }, 100L);
     }
 
     public void onLoad(){

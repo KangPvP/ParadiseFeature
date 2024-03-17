@@ -166,7 +166,7 @@ public class ConfigManager {
 			ConfigManager.getInstance().setString("spawnmap.spawnpoints." + id, locStr);
 		}
 
-		if (ConfigManager.getInstance().getPlayersData().contains("spawnmap.spawnpoints")){
+		if (ConfigManager.datasystemcfg.contains("spawnmap.spawnpoints")){
 			for(UUID id : removeSpawnPoints){
 				String path = "spawnmap.spawnpoints." + id;
 				datasystemcfg.set(path, null);

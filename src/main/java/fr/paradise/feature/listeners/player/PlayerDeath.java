@@ -7,9 +7,14 @@ import fr.paradise.feature.utils.Config;
 import fr.paradise.feature.utils.CreateItems;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.PiglinAbstract;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
@@ -106,6 +111,21 @@ public class PlayerDeath implements Listener {
         event.getDrops().removeIf(item -> item.equals(phone));
 
 
+    }
+
+
+    @EventHandler
+    public void onTarget(EntityTargetLivingEntityEvent event){
+
+        Entity entity = event.getEntity();
+
+        if(entity instanceof PiglinAbstract){
+            if(event.getReason().equals(EntityTargetEvent.TargetReason.CLOSEST_PLAYER)){ //Attaque le joueur le plus proche si target NULL
+                event.setCancelled(true);
+            } else if(event.getReason().equals(EntityTargetEvent.TargetReason.COLLISION)){ //Collision Nouveau calcul du Target
+                event.setCancelled(true);
+            }
+        }
     }
 
 }

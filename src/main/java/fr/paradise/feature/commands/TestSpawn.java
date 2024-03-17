@@ -9,6 +9,8 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class TestSpawn implements CommandExecutor {
@@ -22,10 +24,18 @@ public class TestSpawn implements CommandExecutor {
             creature.setImmuneToZombification(true);
             creature.setAdult();
             creature.setRemoveWhenFarAway(false);
-            creature.getEquipment().setItemInMainHand(new ItemStack(Material.STICK));
+            creature.getEquipment().setItemInMainHand(new ItemStack(Material.LEATHER_HORSE_ARMOR));
+            creature.setTarget((LivingEntity) player);
 
-
+            if(strings.length > 2){
+                for(Entity entity : player.getNearbyEntities(50,50,50)){
+                    if(entity instanceof PiglinAbstract){
+                        ((PiglinAbstract) entity).setTarget(player);
+                    }
+                }
+            }
         }
+
 
 
         return false;
