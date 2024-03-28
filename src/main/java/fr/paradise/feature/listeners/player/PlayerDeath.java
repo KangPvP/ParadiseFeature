@@ -18,6 +18,8 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -27,23 +29,16 @@ public class PlayerDeath implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event){
-        Player player = event.getEntity();
-        Player killer = player.getKiller();
 
-        if(killer != null){
-            System.out.println("Vous avez été tué par :" + killer.getName());
-
-        }
-
-        player.setGameMode(GameMode.SPECTATOR);
-        PlayerDataManager.getData(player).setPlayerDeadCine(0);
-        Vector levitationVector = new Vector(0, 0.1, 0);
-        Location loc = player.getLocation();
-        Location deathLocation = new Location(loc.getWorld(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), 0,90);
 
         new BukkitRunnable() {
-            int ticks = 0;
+            final Player player = event.getEntity();
+            final Player killer = player.getKiller();
 
+            final Vector levitationVector = new Vector(0, 0.05, 0);
+            final Location loc = player.getLocation();
+            final Location deathLocation = new Location(loc.getWorld(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), 0,90);
+            int ticks = 0;
 
             public void run() {
                 if (ticks > 2 && ticks <= 100) {
@@ -65,7 +60,10 @@ public class PlayerDeath implements Listener {
                     cancel(); // Annuler la tâche après la durée spécifiée
                 }
 
-                if(ticks == 2){
+                if(ticks == 0){
+                    player.setGameMode(GameMode.SPECTATOR);
+                    PlayerDataManager.getData(player).setPlayerDeadCine(0);
+
                     Location loc = player.getLocation();
                     player.teleport(deathLocation);
 
@@ -75,7 +73,10 @@ public class PlayerDeath implements Listener {
                     if(killer != null){
                         params.put("%killer%", killer.getName());
                     }
+
                     CommandsHelper.executeAll(Config.getList("deathsystem.commands-death"), params);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 150, 1, false, false));
+
 
                 }else if(ticks == 50){
                     String title = Config.get("deathsystem.title");
@@ -103,16 +104,13 @@ public class PlayerDeath implements Listener {
                     player.setGameMode(GameMode.SURVIVAL);//Remove Player
                 }
 
-                ticks = ticks+2;
+                ticks = ticks+1;
             }
-        }.runTaskTimer(Main.getInstance(), 0, 2); // Exécuter la tâche toutes les 1 tick
+        }.runTaskTimer(Main.getInstance(), 0, 1); // Exécuter la tâche toutes les 1 tick
 
         ItemStack phone = CreateItems.itemsCreated.get("phone");
         event.getDrops().removeIf(item -> item.equals(phone));
-
-
     }
-
 
     @EventHandler
     public void onTarget(EntityTargetLivingEntityEvent event){
