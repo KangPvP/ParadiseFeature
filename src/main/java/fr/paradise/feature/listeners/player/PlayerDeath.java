@@ -59,7 +59,7 @@ public class PlayerDeath implements Listener {
                 } else {
                     cancel(); // Annuler la tâche après la durée spécifiée
                 }
-
+ 
                 if(ticks == 0){
                     player.setGameMode(GameMode.SPECTATOR);
                     PlayerDataManager.getData(player).setPlayerDeadCine(0);
